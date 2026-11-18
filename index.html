@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClipIA - AI Stream Clipper</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b1020;
+      color: white;
+    }
+    header {
+      padding: 24px 7%;
+      border-bottom: 1px solid #263047;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo { font-size: 27px; font-weight: bold; }
+    .logo span { color: #9b72ff; }
+    .status { color: #52d99a; font-size: 13px; }
+    main { max-width: 1100px; margin: auto; padding: 45px 22px; }
+    h1 { font-size: 38px; margin-bottom: 10px; }
+    .subtitle { color: #9ba8bd; line-height: 1.6; }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 35px 0;
+    }
+    .card {
+      background: #151e32;
+      border: 1px solid #293650;
+      border-radius: 14px;
+      padding: 22px;
+    }
+    .number { font-size: 32px; font-weight: bold; margin-top: 12px; }
+    .muted { color: #9ba8bd; font-size: 13px; }
+    input {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #35425c;
+      background: #0b1020;
+      color: white;
+      border-radius: 9px;
+      margin: 15px 0;
+    }
+    button {
+      background: #8254ed;
+      border: none;
+      border-radius: 9px;
+      color: white;
+      padding: 14px 20px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover { background: #7041d5; }
+    .stream { margin-top: 25px; }
+    @media(max-width:650px) {
+      .stats { grid-template-columns: 1fr; }
+      h1 { font-size: 29px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">✂ Clip<span>IA</span></div>
+    <div class="status">● SISTEMA ONLINE</div>
+  </header>
+
+  <main>
+    <h1>Seus melhores momentos. Automaticamente.</h1>
+    <p class="subtitle">
+      Sua inteligência artificial para encontrar os melhores
+      momentos das transmissões e criar cortes.
+    </p>
+
+    <section class="stats">
+      <div class="card">
+        <div class="muted">Lives monitoradas</div>
+        <div class="number" id="lives">0</div>
+      </div>
+      <div class="card">
+        <div class="muted">Cortes encontrados</div>
+        <div class="number">0</div>
+      </div>
+      <div class="card">
+        <div class="muted">Vídeos prontos</div>
+        <div class="number">0</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Adicionar streamer</h2>
+      <p class="muted">Adicione o link de uma transmissão autorizada.</p>
+      <input id="link" placeholder="Cole o link do YouTube aqui">
+      <button onclick="adicionar()">+ Adicionar transmissão</button>
+      <div id="lista" class="stream"></div>
+    </section>
+
+    <section class="card" style="margin-top:25px">
+      <h2>Meus cortes</h2>
+      <p class="muted">
+        Seus melhores momentos aparecerão aqui depois
+        que conectarmos o processamento de vídeo e a IA.
+      </p>
+    </section>
+  </main>
+
+  <script>
+    let lives = 0;
+
+    function adicionar() {
+      const campo = document.getElementById('link');
+      const link = campo.value.trim();
+
+      if (!link || !/^https:\/\/(www\.)?(youtube\.com|youtu\.be)\//i.test(link)) {
+        alert('Insira um link válido do YouTube.');
+        return;
+      }
+
+      lives++;
+      document.getElementById('lives').textContent = lives;
+
+      const item = document.createElement('p');
+      item.textContent = '✓ Transmissão adicionada: ' + link;
+      document.getElementById('lista').appendChild(item);
+
+      campo.value = '';
+    }
+  </script>
+</body>
+</html>
