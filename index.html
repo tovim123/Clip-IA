@@ -2,136 +2,199 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ClipIA - AI Stream Clipper</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0b1020;
-      color: white;
-    }
-    header {
-      padding: 24px 7%;
-      border-bottom: 1px solid #263047;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .logo { font-size: 27px; font-weight: bold; }
-    .logo span { color: #9b72ff; }
-    .status { color: #52d99a; font-size: 13px; }
-    main { max-width: 1100px; margin: auto; padding: 45px 22px; }
-    h1 { font-size: 38px; margin-bottom: 10px; }
-    .subtitle { color: #9ba8bd; line-height: 1.6; }
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin: 35px 0;
-    }
-    .card {
-      background: #151e32;
-      border: 1px solid #293650;
-      border-radius: 14px;
-      padding: 22px;
-    }
-    .number { font-size: 32px; font-weight: bold; margin-top: 12px; }
-    .muted { color: #9ba8bd; font-size: 13px; }
-    input {
-      width: 100%;
-      padding: 15px;
-      border: 1px solid #35425c;
-      background: #0b1020;
-      color: white;
-      border-radius: 9px;
-      margin: 15px 0;
-    }
-    button {
-      background: #8254ed;
-      border: none;
-      border-radius: 9px;
-      color: white;
-      padding: 14px 20px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    button:hover { background: #7041d5; }
-    .stream { margin-top: 25px; }
-    @media(max-width:650px) {
-      .stats { grid-template-columns: 1fr; }
-      h1 { font-size: 29px; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClipIA - Inteligência Artificial</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#090d18;color:#f5f5ff;font-family:Arial,sans-serif}
+header{height:76px;padding:0 6%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #222b40;background:#0d1322}
+.logo{font-size:27px;font-weight:800;letter-spacing:-1px}
+.logo span{color:#9b72ff}
+.status{font-size:12px;color:#a5a9bc}
+.status i{display:inline-block;width:8px;height:8px;border-radius:50%;background:#f0ad4e;margin-right:7px}
+main{max-width:1200px;margin:auto;padding:38px 22px}
+h1{font-size:34px;margin:0 0 10px}
+.subtitle{color:#929db3;line-height:1.6;margin:0}
+.tag{display:inline-block;background:#21183b;color:#bd9cff;padding:7px 12px;border-radius:20px;font-size:11px;margin-bottom:17px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:17px;margin:30px 0}
+.card{background:#121a2b;border:1px solid #26324b;border-radius:15px;padding:22px}
+.stat-label{font-size:13px;color:#929db3}
+.number{font-size:32px;font-weight:bold;margin-top:12px}
+.stat-icon{font-size:22px;margin-bottom:15px}
+.layout{display:grid;grid-template-columns:1.4fr 1fr;gap:18px}
+h2{font-size:19px;margin:0 0 9px}
+.description{font-size:13px;color:#929db3;line-height:1.5}
+input{width:100%;padding:15px;margin:15px 0 12px;background:#090f1d;border:1px solid #35425c;border-radius:9px;color:white;font-size:14px;outline:none}
+input:focus{border-color:#986cff}
+button{border:0;border-radius:9px;background:#8054e9;color:white;padding:14px 18px;font-weight:bold;cursor:pointer}
+button:hover{background:#7040d3}
+.add{width:100%}
+.stream{margin-top:20px}
+.stream-item{padding:14px;background:#0c1424;border:1px solid #29344b;border-radius:10px;margin-top:10px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.stream-name{font-size:13px;word-break:break-all}
+.stream-platform{font-size:11px;color:#a98aff;margin-top:6px}
+.pending{font-size:10px;color:#f1c16c;white-space:nowrap}
+.remove{padding:7px 10px;background:#34202a;color:#ff9da9;font-size:11px}
+.empty{padding:24px 10px;text-align:center;color:#77839a;font-size:13px}
+.feature{padding:13px 0;border-bottom:1px solid #273149;font-size:13px;color:#c8d0df}
+.feature:last-child{border:0}
+.feature span{color:#a88aff;margin-right:9px}
+.bottom{margin-top:18px}
+footer{text-align:center;color:#59657c;font-size:12px;padding:35px}
+@media(max-width:750px){.stats{grid-template-columns:1fr}.layout{grid-template-columns:1fr}h1{font-size:27px}header{padding:0 20px}}
+</style>
 </head>
 <body>
-  <header>
-    <div class="logo">✂ Clip<span>IA</span></div>
-    <div class="status">● SISTEMA ONLINE</div>
-  </header>
+<header>
+  <div class="logo">✂ Clip<span>IA</span></div>
+  <div class="status"><i></i> PAINEL EM DESENVOLVIMENTO</div>
+</header>
 
-  <main>
-    <h1>Seus melhores momentos. Automaticamente.</h1>
-    <p class="subtitle">
-      Sua inteligência artificial para encontrar os melhores
-      momentos das transmissões e criar cortes.
-    </p>
+<main>
+  <div class="tag">✦ INTELIGÊNCIA ARTIFICIAL PARA STREAMERS</div>
+  <h1>Seus melhores momentos. Automaticamente.</h1>
+  <p class="subtitle">Acompanhe suas fontes de transmissão e prepare-se para transformar lives em vídeos curtos com inteligência artificial.</p>
 
-    <section class="stats">
-      <div class="card">
-        <div class="muted">Lives monitoradas</div>
-        <div class="number" id="lives">0</div>
-      </div>
-      <div class="card">
-        <div class="muted">Cortes encontrados</div>
-        <div class="number">0</div>
-      </div>
-      <div class="card">
-        <div class="muted">Vídeos prontos</div>
-        <div class="number">0</div>
-      </div>
-    </section>
+  <section class="stats">
+    <div class="card">
+      <div class="stat-icon">📡</div>
+      <div class="stat-label">Fontes cadastradas</div>
+      <div class="number" id="total">0</div>
+    </div>
+    <div class="card">
+      <div class="stat-icon">✂️</div>
+      <div class="stat-label">Cortes gerados</div>
+      <div class="number">0</div>
+    </div>
+    <div class="card">
+      <div class="stat-icon">🎬</div>
+      <div class="stat-label">Vídeos finalizados</div>
+      <div class="number">0</div>
+    </div>
+  </section>
 
-    <section class="card">
-      <h2>Adicionar streamer</h2>
-      <p class="muted">Adicione o link de uma transmissão autorizada.</p>
-      <input id="link" placeholder="Cole o link do YouTube aqui">
-      <button onclick="adicionar()">+ Adicionar transmissão</button>
-      <div id="lista" class="stream"></div>
-    </section>
+  <section class="layout">
+    <div class="card">
+      <h2>📡 Adicionar transmissão</h2>
+      <p class="description">Cadastre o link de uma live do YouTube ou Twitch que você tenha autorização para utilizar.</p>
+      <input id="link" type="url" placeholder="Cole o link da transmissão aqui">
+      <button class="add" onclick="adicionar()">+ Adicionar streamer</button>
+      <div class="stream" id="lista"></div>
+    </div>
 
-    <section class="card" style="margin-top:25px">
-      <h2>Meus cortes</h2>
-      <p class="muted">
-        Seus melhores momentos aparecerão aqui depois
-        que conectarmos o processamento de vídeo e a IA.
-      </p>
-    </section>
-  </main>
+    <div class="card">
+      <h2>🤖 Central de inteligência artificial</h2>
+      <p class="description">Recursos planejados para as próximas etapas do ClipIA.</p>
+      <div class="feature"><span>✦</span> Detecção automática de momentos interessantes</div>
+      <div class="feature"><span>✦</span> Identificação de reações e acontecimentos</div>
+      <div class="feature"><span>✦</span> Cortes automáticos de vídeo</div>
+      <div class="feature"><span>✦</span> Legendas sincronizadas em português</div>
+      <div class="feature"><span>✦</span> Edição vertical para Reels, TikTok e Shorts</div>
+      <div class="feature"><span>✦</span> Exportação de vídeos em alta qualidade</div>
+    </div>
+  </section>
 
-  <script>
-    let lives = 0;
+  <section class="card bottom">
+    <h2>🎞️ Minha biblioteca de cortes</h2>
+    <p class="description">Seus vídeos gerados aparecerão aqui quando conectarmos o motor de processamento.</p>
+    <div class="empty">Nenhum vídeo gerado ainda.<br>Estamos preparando o ClipIA para começar!</div>
+  </section>
+</main>
 
-    function adicionar() {
-      const campo = document.getElementById('link');
-      const link = campo.value.trim();
+<footer>ClipIA © 2026 — Transformando transmissões em grandes momentos.</footer>
 
-      if (!link || !/^https:\/\/(www\.)?(youtube\.com|youtu\.be)\//i.test(link)) {
-        alert('Insira um link válido do YouTube.');
-        return;
-      }
+<script>
+let fontes = JSON.parse(localStorage.getItem("clipia_fontes") || "[]");
 
-      lives++;
-      document.getElementById('lives').textContent = lives;
+function salvar(){
+  localStorage.setItem("clipia_fontes",JSON.stringify(fontes));
+  renderizar();
+}
 
-      const item = document.createElement('p');
-      item.textContent = '✓ Transmissão adicionada: ' + link;
-      document.getElementById('lista').appendChild(item);
+function adicionar(){
+  const campo=document.getElementById("link");
+  const valor=campo.value.trim();
+  let url;
 
-      campo.value = '';
-    }
-  </script>
+  try{url=new URL(valor)}catch(e){
+    alert("Digite um link válido.");
+    return;
+  }
+
+  const host=url.hostname.toLowerCase();
+  let plataforma="";
+
+  if(host==="youtube.com" || host==="www.youtube.com" || host==="youtu.be" || host==="m.youtube.com"){
+    plataforma="YouTube";
+  }else if(host==="twitch.tv" || host==="www.twitch.tv" || host==="m.twitch.tv"){
+    plataforma="Twitch";
+  }else{
+    alert("Por enquanto, aceitamos links do YouTube e Twitch.");
+    return;
+  }
+
+  if(fontes.some(f=>f.link===url.href)){
+    alert("Esse link já foi cadastrado.");
+    return;
+  }
+
+  fontes.push({link:url.href,plataforma});
+  salvar();
+  campo.value="";
+}
+
+function remover(indice){
+  fontes.splice(indice,1);
+  salvar();
+}
+
+function renderizar(){
+  document.getElementById("total").textContent=fontes.length;
+  const lista=document.getElementById("lista");
+
+  if(fontes.length===0){
+    lista.innerHTML='<div class="empty">Nenhuma transmissão cadastrada.</div>';
+    return;
+  }
+
+  lista.innerHTML="";
+  fontes.forEach((fonte,i)=>{
+    const item=document.createElement("div");
+    item.className="stream-item";
+
+    const info=document.createElement("div");
+    const nome=document.createElement("div");
+    nome.className="stream-name";
+    nome.textContent=fonte.link;
+
+    const plataforma=document.createElement("div");
+    plataforma.className="stream-platform";
+    plataforma.textContent=fonte.plataforma;
+
+    info.append(nome,plataforma);
+
+    const acoes=document.createElement("div");
+    acoes.style.display="flex";
+    acoes.style.alignItems="center";
+    acoes.style.gap="8px";
+
+    const status=document.createElement("span");
+    status.className="pending";
+    status.textContent="CADASTRADA";
+
+    const botao=document.createElement("button");
+    botao.className="remove";
+    botao.textContent="Remover";
+    botao.onclick=()=>remover(i);
+
+    acoes.append(status,botao);
+    item.append(info,acoes);
+    lista.append(item);
+  });
+}
+
+renderizar();
+</script>
 </body>
 </html>
